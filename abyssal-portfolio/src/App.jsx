@@ -609,7 +609,7 @@ export default function App() {
                 VIEW 1: BERANDA (HOME)
                 ================================================================ */}
           {activeView === "beranda" && (
-            <div className="w-full h-full flex flex-col justify-center items-start max-w-5xl mr-auto">
+            <div className="w-full h-full max-h-full overflow-y-auto custom-scrollbar flex flex-col justify-center items-start max-w-5xl mr-auto pr-2">
               {/* Lencana Telemetri Atas */}
               <div
                 className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full font-mono text-xs mb-5"
@@ -1223,7 +1223,7 @@ export default function App() {
                 ================================================================ */}
           {activeView === "kontak" && (
             <div
-              className="w-full max-w-4xl rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
+              className="w-full max-h-full overflow-y-auto custom-scrollbar rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
               style={{
                 backgroundColor: "rgba(4, 9, 20, 0.68)",
                 backdropFilter: "blur(22px)",
