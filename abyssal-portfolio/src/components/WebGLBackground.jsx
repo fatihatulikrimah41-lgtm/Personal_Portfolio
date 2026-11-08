@@ -375,6 +375,75 @@ export default function WebGLBackground({ activeView }) {
       sonarGroup.add(new THREE.Mesh(ringGeo, ringMat));
     }
 
+    // ==========================================================
+    // TAMBAHAN: GEROMBOLAN IKAN MENENGAH (SWIRLING CYBER-FISH)
+    // ==========================================================
+    // 5. BACKGROUND SCHOOL OF AMBIENT GLOWING FISH (38 Boid-like swimmers)
+    const schoolGroup = new THREE.Group();
+    scene.add(schoolGroup);
+
+    // Geometri Rendah-Poly untuk Performa Tinggi (Badan Ramping & Ekor)
+    const smallBodyGeo = new THREE.SphereGeometry(0.12, 8, 6);
+    smallBodyGeo.scale(2.5, 1, 0.5);
+
+    const smallTailGeo = new THREE.PlaneGeometry(0.3, 0.4, 2, 2);
+    smallTailGeo.translate(-0.15, 0, 0); // Geser agar bisa berengsel
+
+    const smallFishMat = new THREE.MeshBasicMaterial({
+      color: 0x4db8ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.45,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const schoolFish = [];
+    for (let i = 0; i < 38; i++) {
+      const fHolder = new THREE.Group();
+
+      // 1. Tambahkan Badan 3D
+      const bodyMesh = new THREE.Mesh(smallBodyGeo, smallFishMat);
+      fHolder.add(bodyMesh);
+
+      // 2. Tambahkan Ekor Berengsel
+      const tailPivot = new THREE.Group();
+      tailPivot.position.set(-0.28, 0, 0); // Pasang engsel di bagian belakang badan
+      const tailMesh = new THREE.Mesh(smallTailGeo, smallFishMat);
+      tailPivot.add(tailMesh);
+      fHolder.add(tailPivot);
+
+      // 3. Inti Cahaya (Glowing Core)
+      const spriteMat = new THREE.SpriteMaterial({
+        map: glowTexture,
+        color: i % 2 === 0 ? 0x00e5ff : 0x4db8ff,
+        transparent: true,
+        opacity: 0.7,
+        blending: THREE.AdditiveBlending,
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.scale.set(0.65, 0.65, 1);
+      fHolder.add(sprite);
+
+      // Posisi & Skala Acak
+      const startX = (Math.random() - 0.5) * 32;
+      const startY = (Math.random() - 0.5) * 16;
+      const startZ = -3 - Math.random() * 16;
+      fHolder.position.set(startX, startY, startZ);
+
+      const scale = 0.55 + Math.random() * 0.9;
+      fHolder.scale.setScalar(scale);
+
+      schoolGroup.add(fHolder);
+      schoolFish.push({
+        group: fHolder,
+        tailPivot: tailPivot, // Simpan referensi ekor untuk dianimasikan
+        speed: 0.025 + Math.random() * 0.045,
+        phase: Math.random() * Math.PI * 2,
+        baseY: startY,
+      });
+    }
+    // ==========================================================
+
     // 7. Interaksi Mouse & Sentuhan Halus
     const pointer = { x: 0, y: 0, targetX: 0, targetY: 0 };
     const handleMouseMove = (e) => {
@@ -514,6 +583,32 @@ export default function WebGLBackground({ activeView }) {
 
       // Rotasi perlahan pada cincin sonar dasar laut
       sonarGroup.rotation.y = elapsedTime * 0.08;
+
+      // ==========================================================
+      // ANIMASI IKAN MENENGAH (SWIRLING ORBIT)
+      // ==========================================================
+      // Animate Background School of Fish (Kini dengan Animasi Ekor)
+      schoolFish.forEach((sf) => {
+        // Gerak maju dengan kecepatan konstan (pengali 1.0)
+        sf.group.position.x += sf.speed * 1.0;
+
+        // Mengapung naik turun
+        sf.group.position.y =
+          sf.baseY + Math.sin(elapsedTime * 2.0 + sf.phase) * 0.65;
+
+        // Rotasi tubuh mengayun natural
+        sf.group.rotation.y = Math.sin(elapsedTime * 5.0 + sf.phase) * 0.22;
+
+        // Kibasan Ekor!
+        sf.tailPivot.rotation.y =
+          Math.sin(elapsedTime * 25 * sf.speed + sf.phase) * 0.6;
+
+        // Reset posisi jika keluar dari layar agar terus berputar
+        if (sf.group.position.x > 18) {
+          sf.group.position.x = -18;
+        }
+      });
+      // ==========================================================
 
       renderer.render(scene, camera);
     };
