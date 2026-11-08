@@ -597,9 +597,9 @@ export default function App() {
             Setiap View dirender sebagai kartu holografik yang muncul/memudar
             di atas kanvas ikan 3D bioluminescent.
             ==================================================================== */}
-      <main className="relative z-20 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-5 overflow-hidden flex items-center justify-center">
+      <main className="relative z-20 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-3 sm:py-5 overflow-hidden flex flex-col">
         <div
-          className={`w-full h-full flex items-center justify-center transition-all duration-300 ${
+          className={`w-full flex-1 min-h-0 flex flex-col transition-all duration-300 ${
             isTransitioning
               ? "opacity-0 scale-[0.98] translate-y-2"
               : "opacity-100 scale-100 translate-y-0"
@@ -609,166 +609,221 @@ export default function App() {
                 VIEW 1: BERANDA (HOME)
                 ================================================================ */}
           {activeView === "beranda" && (
-            <div className="w-full h-full max-h-full overflow-y-auto custom-scrollbar flex flex-col justify-center items-start max-w-5xl mr-auto pr-2">
-              {/* Lencana Telemetri Atas */}
-              <div
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full font-mono text-xs mb-5"
-                style={{
-                  backgroundColor: "rgba(0, 26, 77, 0.55)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(0, 229, 255, 0.45)",
-                  color: "#00E5FF",
-                  boxShadow: "0 0 20px rgba(0, 229, 255, 0.2)",
-                }}
-              >
-                <Radio className="w-3.5 h-3.5 animate-pulse" />
-                <span>SISTEM ARSITEKTUR &amp; KEAMANAN SIBER SIAP OPERASI</span>
-              </div>
-
-              {/* Kartu Holografik Utama Beranda */}
-              <div
-                className="w-full rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
-                style={{
-                  backgroundColor: "rgba(4, 9, 20, 0.58)",
-                  backdropFilter: "blur(18px)",
-                  WebkitBackdropFilter: "blur(18px)",
-                  border: "1px solid rgba(0, 229, 255, 0.38)",
-                  boxShadow:
-                    "0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(0, 229, 255, 0.12), inset 0 0 30px rgba(0, 26, 77, 0.45)",
-                }}
-              >
-                {/* Aksen Sudut Teknologis */}
-                <div className="w-16 h-1 bg-[#00E5FF] mb-6 rounded-full shadow-[0_0_12px_#00E5FF]" />
-
-                {/* Headline Masif Sesuai Master Prompt */}
-                <h1
-                  className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[1.08] mb-6"
-                  style={{
-                    color: "#FFFFFF",
-                    textShadow: "0 0 35px rgba(0, 229, 255, 0.32)",
-                  }}
-                >
-                  YOUR ENGINEERING &amp;{" "}
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #FFFFFF 0%, #00E5FF 55%, #4DB8FF 100%)",
-                    }}
-                  >
-                    SECURITY SPRINT TEAM
-                  </span>{" "}
-                  ON DEMAND
-                </h1>
-
-                {/* Deskripsi Pengantar Berbahasa Indonesia Kelas Investor */}
-                <p
-                  className="text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-6"
-                  style={{ color: "#B3E5FC" }}
-                >
-                  Membangun infrastruktur perangkat lunak berketahanan tinggi,
-                  arsitektur sistem berbasis{" "}
-                  <span className="text-white font-semibold">
-                    First-Principles
-                  </span>
-                  , dan pertahanan keamanan siber terukur. Dirancang oleh{" "}
-                  <span className="text-[#00E5FF] font-semibold">
-                    Fatihatul Ikrimah
-                  </span>{" "}
-                  untuk organisasi yang menuntut eksekusi teknis cepat, presisi
-                  algoritmik, dan keandalan tingkat produksi.
-                </p>
-
-                {/* Dynamic Subheadline dari GitHub API */}
+            <div className="w-full h-full overflow-y-auto custom-scrollbar pr-2 pb-24">
+              <div className="flex flex-col justify-center min-h-full max-w-5xl mr-auto">
+                {/* Lencana Telemetri Atas */}
                 <div
-                  className="w-full max-w-2xl rounded-2xl p-3.5 sm:p-4 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                  className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full font-mono text-xs mb-5"
                   style={{
-                    backgroundColor: "rgba(0, 26, 77, 0.5)",
-                    border: "1px solid rgba(77, 184, 255, 0.35)",
+                    backgroundColor: "rgba(0, 26, 77, 0.55)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(0, 229, 255, 0.45)",
+                    color: "#00E5FF",
+                    boxShadow: "0 0 20px rgba(0, 229, 255, 0.2)",
                   }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF] shrink-0">
-                      <Activity className="w-4 h-4 animate-pulse" />
-                    </div>
-                    <p className="font-mono text-xs sm:text-sm text-white">
-                      {latestActivityText}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => fetchGitHubTelemetry(githubUser)}
-                    className="self-end sm:self-center px-2.5 py-1 rounded-lg font-mono text-[11px] flex items-center gap-1.5 text-[#00E5FF] hover:bg-[#00E5FF]/10 transition-colors shrink-0"
-                    title="Segarkan Telemetri GitHub"
-                  >
-                    <RefreshCw
-                      className={`w-3 h-3 ${apiStatus.loading ? "animate-spin" : ""}`}
-                    />
-                    <span>SYNC</span>
-                  </button>
+                  <Radio className="w-3.5 h-3.5 animate-pulse" />
+                  <span>
+                    SISTEM ARSITEKTUR &amp; KEAMANAN SIBER SIAP OPERASI
+                  </span>
                 </div>
 
-                {/* Tombol CTA Neon Cyan Bercahaya & Navigasi Sekunder */}
-                <div className="flex flex-wrap items-center gap-4">
-                  <button
-                    onClick={() => navigateToView("karya")}
-                    className="group relative px-7 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-3 hover:scale-[1.03] active:scale-[0.99]"
-                    style={{
-                      backgroundColor: "#00E5FF",
-                      color: "#040914",
-                      boxShadow:
-                        "0 0 28px rgba(0, 229, 255, 0.65), 0 0 60px rgba(0, 229, 255, 0.25)",
-                    }}
-                  >
-                    <span>Jelajahi Sistem</span>
-                    <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </button>
+                {/* Kartu Holografik Utama Beranda */}
+                <div
+                  className="w-full rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
+                  style={{
+                    backgroundColor: "rgba(4, 9, 20, 0.58)",
+                    backdropFilter: "blur(18px)",
+                    WebkitBackdropFilter: "blur(18px)",
+                    border: "1px solid rgba(0, 229, 255, 0.38)",
+                    boxShadow:
+                      "0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(0, 229, 255, 0.12), inset 0 0 30px rgba(0, 26, 77, 0.45)",
+                  }}
+                >
+                  <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-center">
+                    {/* =========================================
+                      KOLOM KIRI: TEKS & CTA 
+                      ========================================= */}
+                    <div className="flex-1 w-full flex flex-col items-start">
+                      {/* Aksen Sudut Teknologis */}
+                      <div className="w-16 h-1 bg-[#00E5FF] mb-6 rounded-full shadow-[0_0_12px_#00E5FF]" />
 
-                  <button
-                    onClick={() => navigateToView("tentang")}
-                    className="px-6 py-4 rounded-xl font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 hover:bg-[#00E5FF]/15"
-                    style={{
-                      backgroundColor: "rgba(0, 26, 77, 0.45)",
-                      color: "#FFFFFF",
-                      border: "1px solid rgba(0, 229, 255, 0.45)",
-                    }}
-                  >
-                    <Terminal className="w-4 h-4 text-[#00E5FF]" />
-                    <span>Proposisi Nilai Investor</span>
-                  </button>
-                </div>
+                      {/* Headline Masif Sesuai Master Prompt */}
+                      <h1
+                        className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[1.08] mb-6"
+                        style={{
+                          color: "#FFFFFF",
+                          textShadow: "0 0 35px rgba(0, 229, 255, 0.32)",
+                        }}
+                      >
+                        YOUR ENGINEERING &amp;{" "}
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(90deg, #FFFFFF 0%, #00E5FF 55%, #4DB8FF 100%)",
+                          }}
+                        >
+                          SECURITY SPRINT TEAM
+                        </span>{" "}
+                        ON DEMAND
+                      </h1>
 
-                {/* Metrik Singkat di Bawah Kartu */}
-                <div className="mt-8 pt-6 border-t border-[#4DB8FF]/20 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      ARSITEKTUR INTI
+                      {/* Deskripsi Pengantar */}
+                      <p
+                        className="text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed mb-6"
+                        style={{ color: "#B3E5FC" }}
+                      >
+                        Membangun infrastruktur perangkat lunak berketahanan
+                        tinggi, arsitektur sistem berbasis{" "}
+                        <span className="text-white font-semibold">
+                          First-Principles
+                        </span>
+                        , dan pertahanan keamanan siber terukur. Dirancang oleh{" "}
+                        <span className="text-[#00E5FF] font-semibold">
+                          Fatihatul Ikrimah
+                        </span>{" "}
+                        untuk organisasi yang menuntut eksekusi teknis cepat,
+                        presisi algoritmik, dan keandalan tingkat produksi.
+                      </p>
+
+                      {/* Dynamic Subheadline dari GitHub API */}
+                      <div
+                        className="w-full max-w-2xl rounded-2xl p-3.5 sm:p-4 mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        style={{
+                          backgroundColor: "rgba(0, 26, 77, 0.5)",
+                          border: "1px solid rgba(77, 184, 255, 0.35)",
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="p-2 rounded-lg bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF] shrink-0">
+                            <Activity className="w-4 h-4 animate-pulse" />
+                          </div>
+                          <p className="font-mono text-xs sm:text-sm text-white">
+                            {latestActivityText}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => fetchGitHubTelemetry(githubUser)}
+                          className="self-end sm:self-center px-2.5 py-1 rounded-lg font-mono text-[11px] flex items-center gap-1.5 text-[#00E5FF] hover:bg-[#00E5FF]/10 transition-colors shrink-0"
+                          title="Segarkan Telemetri GitHub"
+                        >
+                          <RefreshCw
+                            className={`w-3 h-3 ${apiStatus.loading ? "animate-spin" : ""}`}
+                          />
+                          <span>SYNC</span>
+                        </button>
+                      </div>
+
+                      {/* Tombol CTA */}
+                      <div className="flex flex-wrap items-center gap-4">
+                        <button
+                          onClick={() => navigateToView("karya")}
+                          className="group relative px-7 py-4 rounded-xl font-mono text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex items-center gap-3 hover:scale-[1.03] active:scale-[0.99]"
+                          style={{
+                            backgroundColor: "#00E5FF",
+                            color: "#040914",
+                            boxShadow:
+                              "0 0 28px rgba(0, 229, 255, 0.65), 0 0 60px rgba(0, 229, 255, 0.25)",
+                          }}
+                        >
+                          <span>Jelajahi Sistem</span>
+                          <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </button>
+
+                        <button
+                          onClick={() => navigateToView("tentang")}
+                          className="px-6 py-4 rounded-xl font-mono text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-2 hover:bg-[#00E5FF]/15"
+                          style={{
+                            backgroundColor: "rgba(0, 26, 77, 0.45)",
+                            color: "#FFFFFF",
+                            border: "1px solid rgba(0, 229, 255, 0.45)",
+                          }}
+                        >
+                          <Terminal className="w-4 h-4 text-[#00E5FF]" />
+                          <span>Proposisi Nilai Investor</span>
+                        </button>
+                      </div>
                     </div>
-                    <div className="font-bold text-sm sm:text-base text-white mt-0.5">
-                      First-Principles
+
+                    {/* =========================================
+                      KOLOM KANAN: TEMPAT FOTO (HERO VISUAL) 
+                      ========================================= */}
+                    <div className="w-full sm:w-2/3 mx-auto lg:w-72 xl:w-[320px] shrink-0">
+                      <div
+                        className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden group"
+                        style={{
+                          backgroundColor: "rgba(4, 9, 20, 0.8)",
+                          border: "1px solid rgba(0, 229, 255, 0.45)",
+                          boxShadow:
+                            "0 0 30px rgba(0, 229, 255, 0.2), inset 0 0 20px rgba(0, 229, 255, 0.15)",
+                        }}
+                      >
+                        {/* GAMBAR PROFIL - Letakkan file Anda di folder public/ dan ubah src di bawah ini */}
+                        <img
+                          src="/src/assets/photo_profile.jpeg"
+                          alt="Profile Fatihatul Ikrimah"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          onError={(e) => {
+                            // Fallback gambar biru holografik jika file belum ada
+                            e.target.src =
+                              "https://via.placeholder.com/400x500/040914/00E5FF?text=FOTO+DISINI";
+                          }}
+                        />
+
+                        {/* Scanline / Gradient Overlay agar menyatu dengan tema Abyssal */}
+                        <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#040914] via-transparent to-transparent opacity-80" />
+
+                        {/* Lencana Cybernetic di atas foto */}
+                        <div className="absolute bottom-4 left-0 w-full flex justify-center pointer-events-none">
+                          <div
+                            className="font-mono text-[10px] text-[#00E5FF] px-3 py-1 rounded-md backdrop-blur-md flex items-center gap-1.5"
+                            style={{
+                              backgroundColor: "rgba(0, 26, 77, 0.7)",
+                              border: "1px solid rgba(0, 229, 255, 0.4)",
+                            }}
+                          >
+                            <Shield className="w-3 h-3" />
+                            <span>VISUAL_ASSET_LOCKED</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      FOKUS KEAMANAN
+
+                  {/* Metrik Singkat di Bawah Kartu */}
+                  <div className="mt-8 pt-6 border-t border-[#4DB8FF]/20 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        ARSITEKTUR INTI
+                      </div>
+                      <div className="font-bold text-sm sm:text-base text-white mt-0.5">
+                        First-Principles
+                      </div>
                     </div>
-                    <div className="font-bold text-sm sm:text-base text-white mt-0.5">
-                      Zero-Trust &amp; C-SIRS
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        FOKUS KEAMANAN
+                      </div>
+                      <div className="font-bold text-sm sm:text-base text-white mt-0.5">
+                        Zero-Trust &amp; C-SIRS
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      PETA JALAN TEKNIS
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        PETA JALAN TEKNIS
+                      </div>
+                      <div className="font-bold text-sm sm:text-base text-white mt-0.5">
+                        4-Tahun Terstruktur
+                      </div>
                     </div>
-                    <div className="font-bold text-sm sm:text-base text-white mt-0.5">
-                      4-Tahun Terstruktur
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      LINGKUNGAN KERJA
-                    </div>
-                    <div className="font-bold text-sm sm:text-base text-[#00E5FF] mt-0.5">
-                      VSCodium Portable
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        LINGKUNGAN KERJA
+                      </div>
+                      <div className="font-bold text-sm sm:text-base text-[#00E5FF] mt-0.5">
+                        VSCodium Portable
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -781,7 +836,7 @@ export default function App() {
                 ================================================================ */}
           {activeView === "tentang" && (
             <div
-              className="w-full max-h-full overflow-y-auto rounded-3xl p-6 sm:p-9 custom-scrollbar"
+              className="w-full h-full overflow-y-auto custom-scrollbar rounded-3xl p-6 sm:p-9"
               style={{
                 backgroundColor: "rgba(4, 9, 20, 0.68)",
                 backdropFilter: "blur(22px)",
@@ -966,7 +1021,7 @@ export default function App() {
                 ================================================================ */}
           {activeView === "karya" && (
             <div
-              className="w-full h-full max-h-full flex flex-col rounded-3xl p-5 sm:p-8 overflow-hidden"
+              className="w-full h-full flex flex-col rounded-3xl p-5 sm:p-8 overflow-hidden"
               style={{
                 backgroundColor: "rgba(4, 9, 20, 0.68)",
                 backdropFilter: "blur(22px)",
@@ -1099,7 +1154,7 @@ export default function App() {
                 ================================================================ */}
           {activeView === "stack" && (
             <div
-              className="w-full h-full max-h-full flex flex-col rounded-3xl p-5 sm:p-8 overflow-hidden"
+              className="w-full h-full flex flex-col rounded-3xl p-5 sm:p-8 overflow-hidden"
               style={{
                 backgroundColor: "rgba(4, 9, 20, 0.68)",
                 backdropFilter: "blur(22px)",
@@ -1222,155 +1277,158 @@ export default function App() {
                 VIEW 5: KONTAK (INVESTOR & CONSULTING DISPATCH)
                 ================================================================ */}
           {activeView === "kontak" && (
-            <div
-              className="w-full max-h-full overflow-y-auto custom-scrollbar rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
-              style={{
-                backgroundColor: "rgba(4, 9, 20, 0.68)",
-                backdropFilter: "blur(22px)",
-                WebkitBackdropFilter: "blur(22px)",
-                border: "1px solid rgba(0, 229, 255, 0.42)",
-                boxShadow:
-                  "0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(0, 229, 255, 0.15)",
-              }}
-            >
-              <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00E5FF] uppercase tracking-widest mb-3">
-                <Radio className="w-4 h-4 animate-pulse" />
-                <span>
-                  05 // SALURAN KOMUNIKASI LANGSUNG &amp; OTORISASI PROYEK
-                </span>
-              </div>
-
-              {/* Kalimat Penutup Persis Sesuai Master Prompt */}
-              <h2
-                className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-4"
-                style={{ textShadow: "0 0 25px rgba(0, 229, 255, 0.25)" }}
-              >
-                Siap untuk skala besar?{" "}
-                <span className="text-[#00E5FF]">
-                  Tersedia untuk Freelance &amp; Konsultasi Teknis.
-                </span>
-              </h2>
-
-              <p className="text-sm sm:text-base text-[#B3E5FC] max-w-2xl leading-relaxed mb-8">
-                Hubungi saya secara langsung untuk perancangan arsitektur sistem
-                dari nol, pengembangan aplikasi full-stack berkinerja tinggi,
-                maupun audit dan penguatan keamanan siber organisasi Anda.
-              </p>
-
-              {/* Kartu Tautan Langsung: GitHub, Email, dan LinkedIn */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <a
-                  href={`https://github.com/${githubUser}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
-                  style={{
-                    backgroundColor: "rgba(0, 26, 77, 0.48)",
-                    border: "1px solid rgba(0, 229, 255, 0.32)",
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
-                      <Code className="w-6 h-6" />
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      REPOSITORI &amp; KODE
-                    </div>
-                    <div className="text-lg font-bold text-white mt-0.5">
-                      GitHub
-                    </div>
-                    <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
-                      github.com/{githubUser}
-                    </div>
-                  </div>
-                </a>
-
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=fatihatulikrimah41@gmail.com&su=Konsultasi%20Teknis%20%26%20Arsitektur%20Sistem&body=Halo%20Fatiha,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek..."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
-                  style={{
-                    backgroundColor: "rgba(0, 26, 77, 0.48)",
-                    border: "1px solid rgba(0, 229, 255, 0.32)",
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      TRANSMISI SURAT ELEKTRONIK
-                    </div>
-                    <div className="text-lg font-bold text-white mt-0.5">
-                      Email
-                    </div>
-                    <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
-                      Kirim Pesan Langsung
-                    </div>
-                  </div>
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/fatihatul-ikrimah-51903b44a/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
-                  style={{
-                    backgroundColor: "rgba(0, 26, 77, 0.48)",
-                    border: "1px solid rgba(0, 229, 255, 0.32)",
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
-                      <Briefcase className="w-6 h-6" />
-                    </div>
-                    <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
-                  </div>
-                  <div>
-                    <div className="font-mono text-xs text-[#4DB8FF]">
-                      JARINGAN EKSEKUTIF
-                    </div>
-                    <div className="text-lg font-bold text-white mt-0.5">
-                      LinkedIn
-                    </div>
-                    <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
-                      Fatihatul Ikrimah
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              {/* Baris Informasi Deployment Render.com & Status Ketersediaan */}
+            <div className="w-full h-full overflow-y-auto custom-scrollbar pr-2 pb-24">
               <div
-                className="p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+                className="flex flex-col justify-center min-h-full max-w-4xl mr-auto rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden"
                 style={{
-                  backgroundColor: "rgba(0, 26, 77, 0.35)",
-                  border: "1px solid rgba(77, 184, 255, 0.25)",
+                  backgroundColor: "rgba(4, 9, 20, 0.68)",
+                  backdropFilter: "blur(22px)",
+                  WebkitBackdropFilter: "blur(22px)",
+                  border: "1px solid rgba(0, 229, 255, 0.42)",
+                  boxShadow:
+                    "0 25px 60px rgba(0, 0, 0, 0.85), 0 0 45px rgba(0, 229, 255, 0.15)",
                 }}
               >
-                <div className="flex items-center gap-3">
-                  <span className="w-3 h-3 rounded-full bg-[#00E5FF] animate-ping" />
-                  <span className="font-mono text-xs text-[#B3E5FC]">
-                    STATUS RESPON:{" "}
-                    <strong className="text-white">
-                      &lt; 4 JAM KERJA (WIB)
-                    </strong>{" "}
-                    // GRESIK &amp; REMOTE GLOBAL
+                <div className="inline-flex items-center gap-2 font-mono text-xs text-[#00E5FF] uppercase tracking-widest mb-3">
+                  <Radio className="w-4 h-4 animate-pulse" />
+                  <span>
+                    05 // SALURAN KOMUNIKASI LANGSUNG &amp; OTORISASI PROYEK
                   </span>
                 </div>
-                <button
-                  onClick={() => navigateToView("beranda")}
-                  className="font-mono text-xs text-[#00E5FF] hover:underline"
+
+                {/* Kalimat Penutup Persis Sesuai Master Prompt */}
+                <h2
+                  className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-4"
+                  style={{ textShadow: "0 0 25px rgba(0, 229, 255, 0.25)" }}
                 >
-                  Kembali ke Beranda Utama →
-                </button>
+                  Siap untuk skala besar?{" "}
+                  <span className="text-[#00E5FF]">
+                    Tersedia untuk Freelance &amp; Konsultasi Teknis.
+                  </span>
+                </h2>
+
+                <p className="text-sm sm:text-base text-[#B3E5FC] max-w-2xl leading-relaxed mb-8">
+                  Hubungi saya secara langsung untuk perancangan arsitektur
+                  sistem dari nol, pengembangan aplikasi full-stack berkinerja
+                  tinggi, maupun audit dan penguatan keamanan siber organisasi
+                  Anda.
+                </p>
+
+                {/* Kartu Tautan Langsung: GitHub, Email, dan LinkedIn */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                  <a
+                    href={`https://github.com/${githubUser}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
+                    style={{
+                      backgroundColor: "rgba(0, 26, 77, 0.48)",
+                      border: "1px solid rgba(0, 229, 255, 0.32)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
+                        <Code className="w-6 h-6" />
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        REPOSITORI &amp; KODE
+                      </div>
+                      <div className="text-lg font-bold text-white mt-0.5">
+                        GitHub
+                      </div>
+                      <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
+                        github.com/{githubUser}
+                      </div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=fatihatulikrimah41@gmail.com&su=Konsultasi%20Teknis%20%26%20Arsitektur%20Sistem&body=Halo%20Fatiha,%20saya%20tertarik%20untuk%20berdiskusi%20mengenai%20proyek..."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
+                    style={{
+                      backgroundColor: "rgba(0, 26, 77, 0.48)",
+                      border: "1px solid rgba(0, 229, 255, 0.32)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
+                        <Mail className="w-6 h-6" />
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        TRANSMISI SURAT ELEKTRONIK
+                      </div>
+                      <div className="text-lg font-bold text-white mt-0.5">
+                        Email
+                      </div>
+                      <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
+                        Kirim Pesan Langsung
+                      </div>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/fatihatul-ikrimah-51903b44a/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-5 rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#00E5FF] group"
+                    style={{
+                      backgroundColor: "rgba(0, 26, 77, 0.48)",
+                      border: "1px solid rgba(0, 229, 255, 0.32)",
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-[#040914] border border-[#00E5FF]/40 text-[#00E5FF]">
+                        <Briefcase className="w-6 h-6" />
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-[#4DB8FF] group-hover:text-[#00E5FF]" />
+                    </div>
+                    <div>
+                      <div className="font-mono text-xs text-[#4DB8FF]">
+                        JARINGAN EKSEKUTIF
+                      </div>
+                      <div className="text-lg font-bold text-white mt-0.5">
+                        LinkedIn
+                      </div>
+                      <div className="font-mono text-xs text-[#00E5FF] mt-1 truncate">
+                        Fatihatul Ikrimah
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                {/* Baris Informasi Deployment Render.com & Status Ketersediaan */}
+                <div
+                  className="p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
+                  style={{
+                    backgroundColor: "rgba(0, 26, 77, 0.35)",
+                    border: "1px solid rgba(77, 184, 255, 0.25)",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-3 h-3 rounded-full bg-[#00E5FF] animate-ping" />
+                    <span className="font-mono text-xs text-[#B3E5FC]">
+                      STATUS RESPON:{" "}
+                      <strong className="text-white">
+                        &lt; 4 JAM KERJA (WIB)
+                      </strong>{" "}
+                      // GRESIK &amp; REMOTE GLOBAL
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => navigateToView("beranda")}
+                    className="font-mono text-xs text-[#00E5FF] hover:underline"
+                  >
+                    Kembali ke Beranda Utama →
+                  </button>
+                </div>
               </div>
             </div>
           )}
