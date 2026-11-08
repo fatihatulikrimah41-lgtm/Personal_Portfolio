@@ -761,7 +761,7 @@ export default function App() {
                       >
                         {/* GAMBAR PROFIL - Letakkan file Anda di folder public/ dan ubah src di bawah ini */}
                         <img
-                          src="./src/assets/photo_profile.jpeg"
+                          src="/abyssal-portfolio/src/assets/photo_profile.jpeg"
                           alt="Profile Fatihatul Ikrimah"
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           onError={(e) => {
