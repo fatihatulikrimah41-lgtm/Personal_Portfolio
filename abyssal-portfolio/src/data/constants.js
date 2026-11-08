@@ -197,26 +197,29 @@ export const ROADMAP_YEARS = [
 export const ABYSS_TRACKS = [
   {
     id: 1,
-    title: "Hadal Zone Telemetry",
-    artist: "M.A. Synth Lab • 432Hz Deep Focus",
+    title: "Sunlit Tropic Stream",
+    artist: "M.A. Synth Lab • Upbeat & Radiant",
     duration: "04:18",
-    freqBase: 110,
-    chord: [110, 164.81, 220, 261.63, 329.63],
+    freqBase: 261.63,
+    // C Major 6/9: Very happy, open, and energetic (Higher octave)
+    chord: [261.63, 329.63, 392.0, 440.0, 587.33],
   },
   {
     id: 2,
-    title: "Bioluminescent Packet Flow",
-    artist: "Cybernetic Koi • Abyssal Ambient",
+    title: "Euphoric Cyber-Reef",
+    artist: "Bioluminescent Core • Triumphant",
     duration: "03:52",
-    freqBase: 98,
-    chord: [98, 146.83, 196, 246.94, 293.66],
+    freqBase: 311.13,
+    // Eb Major 9: Uplifting, bouncy, and bright
+    chord: [311.13, 392.0, 466.16, 587.33, 698.46],
   },
   {
     id: 3,
-    title: "Zero-Trust Trench Protocol",
-    artist: "Gresik Engineering Core • Darkwave",
+    title: "Neon Velocity Spark",
+    artist: "Gresik Engineering • Shimmering Highs",
     duration: "05:04",
-    freqBase: 130.81,
-    chord: [130.81, 196.0, 261.63, 311.13, 392.0],
+    freqBase: 349.23,
+    // F Major Add 9: Pure positive energy and sparkle
+    chord: [349.23, 440.0, 523.25, 783.99, 880.0],
   },
 ];
